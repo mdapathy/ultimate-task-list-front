@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {YesNoModalComponent} from '../../../shared/yes-no-modal/yes-no-modal.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class ModalService {
     }
 
     openModal(text, style): any {
-        const modalRef = this.modalService.open(YesNoModalComponent);
+        const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.text = text;
         modalRef.componentInstance.style = style;
 

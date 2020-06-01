@@ -1,0 +1,8 @@
+.col {
+    background-color: #ece2c8;
+}
+
+.btn-outline-secondary:active {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}

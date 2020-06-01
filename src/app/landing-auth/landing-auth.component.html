@@ -1,0 +1,42 @@
+<div class="row m-2 p-2">
+    <div class="p-3 container-sm  col-xs-2 col-sm-4 col-md-4 col-lg-3 ">
+    <button type="button" class="btn btn-outline-primary w-100"  (click)="newProject()"  
+        aria-pressed="false" autocomplete="off">
+         ADD NEW PROJECT
+    </button>
+    <h5 class="mt-2 mb-2"> Existing Projects </h5>
+    <div *ngIf="!projects?.length && loaded">
+        No projects found
+    </div>
+    <div *ngFor="let project of projects">
+        <button type="button" class="btn btn-outline-secondary w-100" [ngClass]="{ 'active' : project===currentProject }" (click)="openProject(project)"  data-toggle="button" 
+        aria-pressed="false" autocomplete="off">
+        {{project.name}}
+        </button>
+    </div>
+</div>
+<div class="p-3 container-sm col-xs-9 col-sm-7 col-md-7 col-lg-9 h-100">
+    <h5 class="mb-4" style="font-weight: bold;"> Tasks </h5>
+    <h5 *ngIf="!currentProject" class="mt-4 ml-4 h-100" style="color: cornflowerblue;">
+        Choose a project to see the tasks below
+    </h5>
+    <h5 *ngIf="loaded && currentProject && !tasks.length" class="mt-4 ml-4 h-100" style="color: cornflowerblue;">
+       No tasks in this project
+    </h5>
+    <div *ngFor="let task of tasks" style="font-size: larger;">
+        <div class="w-100 ml-4 mb-2">
+        {{task.name}} 
+        </div>
+    </div>
+    <form (keydown)="addTask($event)">
+    <input *ngIf="currentProject" type="name"
+    placeholder="Enter task name"
+    name="taskName"
+    [(ngModel)]="taskName"
+    class="form-control rounded mt-4"
+   />
+</form>
+
+
+</div>
+</div>

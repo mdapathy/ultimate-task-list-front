@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { ToastsService } from 'src/app/utils/toasts.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +21,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private toastsService: ToastsService
   ) { }
 
   ngOnInit(): void {
