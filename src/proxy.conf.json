@@ -1,0 +1,11 @@
+{
+    "/*": {
+    "target": "https://ultimate-task-list.herokuapp.com/",
+    "secure": true,
+    "pathRewrite": {
+    "^/posts": ""
+  },
+    "changeOrigin": true
+  }
+
+}
