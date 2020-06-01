@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light navbar-expand-md bg-light justify-content-md-start justify-content-start mb-3 p-2 sp-text" style="background-color: #c2b490">
     <a class="navbar-brand d-md-block mr-auto" style="color:rgb(153, 109, 91)" routerLink="/"> UltimateTaskList</a> 
-    <ng-container *ngIf="!loggedIn;">
+    <ng-container *ngIf="!authenticationService.currentUserValue;">
         <a class="nav-link sp-text d-md-block" routerLink="/login"> Log In</a> 
         <a class="nav-link sp-text d-md-block" routerLink="/signup"> Sign Up</a> 
     </ng-container>
-    <a class="nav-link sp-text"  *ngIf="loggedIn" (click)="logOut()" style="cursor: pointer;"> Log Out</a> 
+    <a class="nav-link sp-text"  *ngIf="authenticationService.currentUserValue" (click)="logOut()" style="cursor: pointer;"> Log Out</a> 
 </nav>
     

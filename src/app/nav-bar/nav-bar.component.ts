@@ -9,19 +9,22 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  loggedIn: boolean;
+  //authenticationService: AuthenticationService;
 
-  constructor(private authenticationService: AuthenticationService,
-              private router: Router) {
-    this.loggedIn = !!this.authenticationService.currentUserValue;
-   }
+  constructor(
+    public authenticationService: AuthenticationService,
+    private router: Router,
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
-  logOut(){
+
+  logOut() {
     this.authenticationService.logOut();
     this.router.navigateByUrl('/');
+
   }
 
 }
