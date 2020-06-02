@@ -44,7 +44,7 @@ export class ProjectService {
   }
 
   deleteProject(projectId: string): Observable<any> {
-    return this.http.delete<any>(this.url + projectId, { headers: this.httpOptions.headers }).pipe();
+    return this.http.post<any>(this.url + projectId + '/delete', null, { headers: this.httpOptions.headers }).pipe();
   }
 
   getTasksByProjectId(projectId: string): Observable<Task[]> {

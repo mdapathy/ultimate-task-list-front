@@ -89,6 +89,24 @@ export class LandingAuthComponent implements OnInit, OnDestroy {
     ));
   }
 
+
+
+  deleteProject(id: string) {
+
+    this.projects = this.projects.filter((projectInArray) => {
+      return projectInArray.projectId !== id;
+    });
+    this.tasks = undefined;
+    this.currentProject = undefined;
+
+    this.subscriptions.push(this.projectService.deleteProject(id).subscribe(
+      (res) => {
+      },
+      (error) => console.log(error)
+    ));
+  }
+
+
   receiveMessage($event) {
     alert($event);
   }
