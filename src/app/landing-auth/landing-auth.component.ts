@@ -3,14 +3,13 @@ import { FormBuilder } from '@angular/forms';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../_services/project/project.service';
-import { NavBarComponent } from '../nav-bar/nav-bar.component';
 import { Subscription } from 'rxjs';
 import { Project } from '../_models/project';
-import { ModalService } from '../utils/modal.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 import { TasksService } from '../_services/task/tasks.service';
 import { Task } from '../_models/task';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-landing-auth',
@@ -78,18 +77,49 @@ export class LandingAuthComponent implements OnInit, OnDestroy {
   addTask(event) {
     if (event.keyCode === 13) {
       const task = new Task();
+
       task.userId = this.authenticationService.currentUserValue.id;
       task.name = this.taskName;
+      task.projectId = this.currentProject.projectId;
+      task.priorityId = '4';
+
       this.tasks.push(task);
+
       this.taskName = '';
-      
+      const pos = this.tasks.length - 1;
       this.subscriptions.push(this.taskService.addTask(task).subscribe(
         (res) => {
-          this.tasks[this.tasks.length - 1].taskId = res.taskId,
+          this.tasks[pos].taskId = res.taskId,
             this.loaded = true;
         },
         (error) => console.log(error)
       ));
     }
+  }
+
+  deleteTask(task: Task) {
+    this.tasks = this.tasks.filter((taskInArray) => {
+      return JSON.stringify(task) !== JSON.stringify(taskInArray);
+    });
+
+    this.subscriptions.push(this.taskService.deleteTask(task.taskId).subscribe(
+      (res) => {
+      },
+      (error) => console.log(error)
+    ));
+
+  }
+
+  completeTask(task: Task) {
+    this.tasks = this.tasks.filter((taskInArray) => {
+      return JSON.stringify(task) !== JSON.stringify(taskInArray);
+    });
+
+    this.subscriptions.push(this.taskService.markDoneTask(task.taskId).subscribe(
+      (res) => {
+      },
+      (error) => console.log(error)
+    ));
+
   }
 }

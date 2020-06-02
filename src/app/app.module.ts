@@ -12,6 +12,7 @@ import { LandingUnauthComponent } from './landing-unauth/landing-unauth.componen
 import { LandingAuthComponent } from './landing-auth/landing-auth.component';
 import { ValidationComponent } from './validation/validation.component';
 import { ModalComponent } from './modal/modal.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { ModalComponent } from './modal/modal.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

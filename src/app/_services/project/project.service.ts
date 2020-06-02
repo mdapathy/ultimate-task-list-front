@@ -48,6 +48,6 @@ export class ProjectService {
   }
 
   getTasksByProjectId(projectId: string): Observable<Task[]> {
-    return this.http.get<Task[]>(this.url + projectId + '/tasks', { headers: this.httpOptions.headers }).pipe();
+    return this.http.get<Task[]>(this.url + projectId + '/tasks/uncompleted', { headers: this.httpOptions.headers }).pipe();
   }
 }

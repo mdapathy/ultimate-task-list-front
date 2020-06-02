@@ -23,10 +23,24 @@
     <h5 *ngIf="loaded && currentProject && !tasks.length" class="mt-4 ml-4 h-100" style="color: cornflowerblue;">
        No tasks in this project
     </h5>
-    <div *ngFor="let task of tasks" style="font-size: larger;">
-        <div class="w-100 ml-4 mb-2">
-        {{task.name}} 
+    <div *ngFor="let task of tasks" class="ml-4" style="font-size: larger;">
+        <div class="w-100 mb-2 border border-dark p-2 row">
+            <div class=" col-xs-9 col-sm-7 col-md-9 col-lg-10">
+                <button type="button" class="btn btn-outline-secondary mr-1 btn-sm"
+                (click)="completeTask(task)" [ngClass]="{ 'disabled' : task.taskId===undefined }" >
+                    <i class="fa fa-check complete"></i>
+                </button>
+                <button>
+            {{task.name}}    
+            </button>
+            </div>    
+            <button type="button" class="btn btn-outline-secondary col-xs-2 col-sm-4 col-md-3 col-lg-2 " data-toggle="button" 
+            aria-pressed="false" [ngClass]="{ 'disabled' : task.taskId===undefined }"  (click)="deleteTask(task)"  autocomplete="off">
+                Delete
+            </button>
+
         </div>
+
     </div>
     <form (keydown)="addTask($event)">
     <input *ngIf="currentProject" type="name"

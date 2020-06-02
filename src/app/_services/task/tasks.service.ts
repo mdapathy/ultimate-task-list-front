@@ -35,12 +35,12 @@ export class TasksService {
 
 
   deleteTask(taskId: string): Observable<any> {
-    return this.http.delete<any>(this.url + taskId + '/delete', { headers: this.httpOptions.headers }).pipe();
+    return this.http.post<any>(this.url + taskId + '/delete', null, { headers: this.httpOptions.headers } ).pipe();
   }
 
 
   markDoneTask(taskId: string): Observable<any> {
-    return this.http.post<any>(this.url + taskId + '/mark-done', { headers: this.httpOptions.headers }).pipe();
+    return this.http.post<any>(this.url + taskId + '/mark-done', null, { headers: this.httpOptions.headers }).pipe();
   }
 
 

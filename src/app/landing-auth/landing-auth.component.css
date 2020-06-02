@@ -6,3 +6,15 @@
     background-color: #6c757d;
     border-color: #6c757d;
 }
+
+.complete {
+    visibility: hidden;
+}
+
+.btn-outline-secondary:hover > .complete {
+    visibility: visible;
+}
+
+.complete:active {
+    visibility: visible;
+}
