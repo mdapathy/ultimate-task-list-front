@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
             alert('Check your email!');
           },
           (error) => {
-            this.passwordMessage = error;
+            this.confirmPasswordMessage = error.error;
             this.signUpForm.password = null;
             this.signUpForm.confirmPassword = null;
           }
