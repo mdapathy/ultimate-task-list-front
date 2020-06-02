@@ -35,7 +35,7 @@ export class ProjectService {
   }
 
   addProject(project: Project): Observable<any> {
-    return this.http.post<any>(this.url + 'add', JSON.stringify(project), { headers: this.httpOptions.headers }).pipe();
+    return this.http.post<any>(this.url + 'create', JSON.stringify(project), { headers: this.httpOptions.headers }).pipe();
   }
 
 

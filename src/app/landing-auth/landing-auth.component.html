@@ -10,7 +10,7 @@
     </div>
     <div *ngFor="let project of projects">
         <button type="button" class="btn btn-outline-secondary w-100" [ngClass]="{ 'active' : project===currentProject }" (click)="openProject(project)"  data-toggle="button" 
-        aria-pressed="false" autocomplete="off">
+        aria-pressed="false" autocomplete="off"  [ngClass]="{ 'disabled' :  project.projectId===undefined }" >
         {{project.name}}
         </button>
     </div>
@@ -30,9 +30,7 @@
                 (click)="completeTask(task)" [ngClass]="{ 'disabled' : task.taskId===undefined }" >
                     <i class="fa fa-check complete"></i>
                 </button>
-                <button>
-            {{task.name}}    
-            </button>
+             {{task.name}}    
             </div>    
             <button type="button" class="btn btn-outline-secondary col-xs-2 col-sm-4 col-md-3 col-lg-2 " data-toggle="button" 
             aria-pressed="false" [ngClass]="{ 'disabled' : task.taskId===undefined }"  (click)="deleteTask(task)"  autocomplete="off">

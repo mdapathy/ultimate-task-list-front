@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../_services/authentication/authentication.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../_services/project/project.service';
@@ -9,27 +8,32 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
 import { TasksService } from '../_services/task/tasks.service';
 import { Task } from '../_models/task';
+import { DataService } from '../_services/data/data.service';
 import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-landing-auth',
   templateUrl: './landing-auth.component.html',
-  styleUrls: ['./landing-auth.component.css']
+  styleUrls: ['./landing-auth.component.css'],
 })
 export class LandingAuthComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   loaded: boolean;
-  projects: Project[];
-  tasks: Task[];
+  projects: Project[] = [];
+  tasks: Task[] = [];
   currentProject: Project;
   taskName: string;
+
+  @ViewChild(ModalComponent) child;
+
 
   constructor(
     private authenticationService: AuthenticationService,
     private router: Router,
     private projectService: ProjectService,
     private taskService: TasksService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private dataService: DataService
   ) {
     this.loaded = false;
   }
@@ -47,6 +51,13 @@ export class LandingAuthComponent implements OnInit, OnDestroy {
       },
       (error) => console.log(error)
     ));
+    this.subscriptions.push(this.dataService.currentMessage.subscribe(
+      message => {
+        if (message !== null && message.length > 1) {
+          this.addProject(message);
+        }
+      }));
+
   }
 
   ngOnDestroy() {
@@ -62,9 +73,29 @@ export class LandingAuthComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ModalComponent, { size: 'small' });
   }
 
+  addProject(name: string) {
+    const project = new Project();
+    project.name = name;
+    project.userId = this.authenticationService.currentUserValue.id;
+
+    this.projects.push(project);
+
+    const pos = this.projects.length;
+    this.subscriptions.push(this.projectService.addProject(project).subscribe(
+      (res) => {
+        this.projects[pos - 1].projectId = res.projectId;
+      },
+      (error) => console.log(error)
+    ));
+  }
+
+  receiveMessage($event) {
+    alert($event);
+  }
 
   loadTasks(projectId: string) {
     this.loaded = false;
+    this.tasks = null;
     this.subscriptions.push(this.projectService.getTasksByProjectId(projectId).subscribe(
       (res) => {
         this.tasks = res,
