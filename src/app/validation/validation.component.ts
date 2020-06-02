@@ -36,10 +36,10 @@ export class ValidationComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.authenticationService.activate(activationUrl).subscribe(
         (result) => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login'], { state: { data: 'You email is activated! You may login now.' }});
         },
         (error) => {
-          this.router.navigate(['/login']); //TODO send errror
+          this.router.navigate(['/login'],  { state: { data: error.error.message.toString() }});
         }
       ));
   }

@@ -31,6 +31,10 @@ export class LogInComponent implements OnInit, OnDestroy {
       email: '',
       password: ''
     });
+
+    if (history.state.data) {
+      alert(history.state.data);
+    }
   }
 
   onSubmit(loginData) {
