@@ -44,7 +44,7 @@ export class LogInComponent implements OnInit, OnDestroy {
           },
           (error) => {
             this.logInForm.password = null;
-            this.passwordMessage = error.error;
+            this.passwordMessage = error.error.message;
           }
         ));
     }
