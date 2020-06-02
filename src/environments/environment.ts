@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8081/api/',
-  //apiUrl:"https://ultimate-task-list.herokuapp.com/api/"
+  //apiUrl: 'http://localhost:8081/api/',
+  apiUrl:"https://ultimate-task-list.herokuapp.com/api/"
 };
 
 /*
